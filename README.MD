@@ -1,4 +1,2 @@
-### Entity for COVID19
-
-
+# Covid19 Entity
 

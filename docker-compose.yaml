@@ -1,0 +1,26 @@
+version: "3"
+
+services:
+  covid19:
+    build: .
+    restart: always
+    environment:
+      FB_ACCESS_TOKEN: ${FB_ACCESS_TOKEN}
+      FB_VERIFY_SECRET: ${FB_VERIFY_SECRET}
+      FB_PAGE_ID: ${FB_PAGE_ID}
+      WN_URL: ${WN_URL}
+      WN_VERSION: ${WN_VERSION}
+      WN_ASSISTANT_ID: ${WN_ASSISTANT_ID}
+      WN_API_KEY: ${WN_API_KEY}
+  portal:
+    image: steveltn/https-portal
+    restart: always
+    ports:
+      - 80:80
+      - 443:443
+    links:
+      - marvin
+    environment:
+      DOMAINS: "covid19.minsky.cc -> http://marvin:8080"
+      STAGE: "production"
+      #FORCE_RENEW: "true"
