@@ -19,8 +19,8 @@ services:
       - 80:80
       - 443:443
     links:
-      - marvin
+      - covid19
     environment:
-      DOMAINS: "covid19.minsky.cc -> http://marvin:8080"
+      DOMAINS: "covid19.minsky.cc -> http://covid19:8080"
       STAGE: "production"
       #FORCE_RENEW: "true"
