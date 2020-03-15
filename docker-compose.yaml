@@ -21,6 +21,6 @@ services:
     links:
       - covid19
     environment:
-      DOMAINS: "covid19.minsky.cc -> http://covid19:8080"
+      DOMAINS: "entity-covid19.minsky.cc -> http://covid19:8080"
       STAGE: "production"
       #FORCE_RENEW: "true"
