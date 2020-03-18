@@ -2,6 +2,7 @@ package main
 
 import (
 	"os"
+	"strings"
 	"time"
 
 	"github.com/minskylab/covid19-entity"
@@ -46,11 +47,21 @@ func main() {
 		dni := c.GetStringContextVariable("dni", "00000000")
 		phone := c.GetStringContextVariable("phone", "+51957821858")
 
-		log.WithField("dni", dni).Info("generating sms alert")
+		phone = strings.TrimSpace(phone)
+		if !strings.HasPrefix(phone, "+51") {
+			phone = "+51" + phone
+		}
+
+		log.WithFields(log.Fields{
+			"dni":   dni,
+			"phone": phone,
+		}).Info("generating sms alert")
+
+		response(c, out)
 
 		timer, err := emitter.LogMeasureBySMS(phone, c.Person.Name, 15*time.Minute)
 		if err != nil {
-			return errors.Wrap(err, "error at create time on episodio 3 resolve")
+			return errors.Wrap(err, "error at emmit message on episodio 3 resolve")
 		}
 
 		go func(to, name, dni string) {
@@ -60,7 +71,7 @@ func main() {
 			}
 		}(phone, c.Person.Name, dni)
 
-		return response(c, out)
+		return nil
 	})
 
 	engine.ResolveAny(fb, func(c *neo.Context, in *neo.Input, out *neo.Output, response neo.OutputResponse) error {
