@@ -45,7 +45,7 @@ func (emitter *Emitter) LogMeasureBySMS(to string, name string, nextMeasurementD
 	nextString := next.Format("January 02, 2006 a las 15:04")
 	nextMeasure := fmt.Sprintf("Tu siguiente medición, esta programada para %s, te estaremos avisando.", nextString)
 
-	message := fmt.Sprintf("Hola %s, somos de ChatCOVID vamos estar pendientes de usted para reconocer cómo van evolucionando sus síntomas, por eso le estamos programando un seguimiento personalizado. %s", name, nextMeasure)
+	message := fmt.Sprintf("Hola %s, somos de ChatCOVID estaremos pendientes de usted para reconocer cómo van evolucionando sus síntomas, por eso le estamos programando un seguimiento personalizado. %s", name, nextMeasure)
 
 	log.Infof("message to send: %s", message)
 

@@ -64,12 +64,12 @@ func main() {
 			return errors.Wrap(err, "error at emmit message on episodio 3 resolve")
 		}
 
-		go func(to, name, dni string) {
+		go func(to, name, dni string, timer *time.Timer) {
 			<-timer.C
 			if err := emitter.SendRemember(to, name, dni); err != nil {
 				panic(err)
 			}
-		}(phone, c.Person.Name, dni)
+		}(phone, c.Person.Name, dni, timer)
 
 		return nil
 	})
