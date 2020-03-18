@@ -1,3 +1,5 @@
 package covid19
 
-type covid19 struct{}
+type COVID19 struct {
+	cases chan string
+}
